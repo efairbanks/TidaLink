@@ -7252,14 +7252,6 @@ chrono
 cmath
 -
 
-../link/include/ableton/link/HostTimeFilter.hpp
-ableton/link/LinearRegression.hpp
--
-chrono
--
-vector
--
-
 ../link/include/ableton/link/Kalman.hpp
 array
 -
@@ -7606,87 +7598,9 @@ string
 memory
 -
 
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioEngine.hpp
+/Users/eric/TidaLink/main.cpp
 ableton/Link.hpp
 -
-mutex
--
-
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform.hpp
-AudioPlatform_Asio.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Asio.hpp
-AudioPlatform_CoreAudio.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_CoreAudio.hpp
-AudioPlatform_Dummy.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Dummy.hpp
-AudioPlatform_Jack.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Jack.hpp
-AudioPlatform_Portaudio.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Portaudio.hpp
-AudioPlatform_Wasapi.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Wasapi.hpp
-
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Asio.hpp
-AudioEngine.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioEngine.hpp
-ableton/Link.hpp
--
-ableton/link/HostTimeFilter.hpp
--
-asiosys.h
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/asiosys.h
-asio.h
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/asio.h
-asiodrivers.h
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/asiodrivers.h
-
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_CoreAudio.hpp
-AudioEngine.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioEngine.hpp
-AudioToolbox/AudioToolbox.h
--
-
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Dummy.hpp
-AudioEngine.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioEngine.hpp
-
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Jack.hpp
-AudioEngine.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioEngine.hpp
-ableton/link/HostTimeFilter.hpp
--
-ableton/platforms/Config.hpp
--
-jack/jack.h
--
-
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Portaudio.hpp
-AudioEngine.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioEngine.hpp
-ableton/link/HostTimeFilter.hpp
--
-ableton/platforms/Config.hpp
--
-portaudio.h
--
-
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Wasapi.hpp
-AudioEngine.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioEngine.hpp
-Audioclient.h
--
-Mmdeviceapi.h
--
-ableton/link/HostTimeFilter.hpp
--
-atomic
--
-
-/Users/eric/Google Drive/tidalink/main.cpp
-ableton/Link.hpp
--
-./link/examples/linkaudio/AudioPlatform.hpp
-/Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform.hpp
 algorithm
 -
 atomic

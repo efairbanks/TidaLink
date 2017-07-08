@@ -430,7 +430,6 @@ CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/ClientSessionTi
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/Controller.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/Gateway.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/GhostXForm.hpp
-CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/HostTimeFilter.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/Kalman.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/LinearRegression.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/Measurement.hpp
@@ -466,13 +465,5 @@ CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/platforms/windows/Sc
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/util/Injected.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/util/Log.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/util/SafeAsyncHandler.hpp
-CMakeFiles/TidaLink.dir/main.cpp.o: .././link/examples/linkaudio/AudioEngine.hpp
-CMakeFiles/TidaLink.dir/main.cpp.o: .././link/examples/linkaudio/AudioPlatform.hpp
-CMakeFiles/TidaLink.dir/main.cpp.o: .././link/examples/linkaudio/AudioPlatform_Asio.hpp
-CMakeFiles/TidaLink.dir/main.cpp.o: .././link/examples/linkaudio/AudioPlatform_CoreAudio.hpp
-CMakeFiles/TidaLink.dir/main.cpp.o: .././link/examples/linkaudio/AudioPlatform_Dummy.hpp
-CMakeFiles/TidaLink.dir/main.cpp.o: .././link/examples/linkaudio/AudioPlatform_Jack.hpp
-CMakeFiles/TidaLink.dir/main.cpp.o: .././link/examples/linkaudio/AudioPlatform_Portaudio.hpp
-CMakeFiles/TidaLink.dir/main.cpp.o: .././link/examples/linkaudio/AudioPlatform_Wasapi.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../main.cpp
 

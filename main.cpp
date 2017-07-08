@@ -18,9 +18,7 @@
  */
 
 #include <ableton/Link.hpp>
-#include "./link/examples/linkaudio/AudioPlatform.hpp"
-//#include "AudioPlatform.hpp"
-//#include "AudioPlatform_CoreAudio.hpp"
+//#include "./link/examples/linkaudio/AudioPlatform.hpp"
 #include <algorithm>
 #include <atomic>
 #include <chrono>
@@ -33,17 +31,17 @@
 #include <unistd.h>
 #include <math.h>
 #endif
-/*
+
 struct State
 {
   std::atomic<bool> running;
   ableton::Link link;
-  ableton::linkaudio::AudioPlatform audioPlatform;
+  //ableton::linkaudio::AudioPlatform audioPlatform;
 
   State()
     : running(true)
     , link(120.)
-    , audioPlatform(link)
+    //, audioPlatform(link)
   {
     link.enable(true);
   }
@@ -128,7 +126,7 @@ void input(State& state)
 #endif
 
   const auto tempo = state.link.captureAppTimeline().tempo();
-  auto& engine = state.audioPlatform.mEngine;
+  //auto& engine = state.audioPlatform.mEngine;
 
   switch (in)
   {
@@ -137,18 +135,19 @@ void input(State& state)
     clearLine();
     return;
   case 'w':
-    engine.setTempo(tempo - 1);
+    //engine.setTempo(tempo - 1);
     break;
   case 'e':
-    engine.setTempo(tempo + 1);
+    //engine.setTempo(tempo + 1);
     break;
   case 'r':
-    engine.setQuantum(engine.quantum() - 1);
+    //engine.setQuantum(engine.quantum() - 1);
     break;
   case 't':
-    engine.setQuantum(std::max(1., engine.quantum() + 1));
+    //engine.setQuantum(std::max(1., engine.quantum() + 1));
     break;
   case ' ':
+    /*
     if (engine.isPlaying())
     {
       engine.stopPlaying();
@@ -157,14 +156,15 @@ void input(State& state)
     {
       engine.startPlaying();
     }
+    */
     break;
   }
 
   input(state);
 }
-*/
+
 int main(int, char**)
-{/*
+{
   State state;
   printHelp();
   std::thread thread(input, std::ref(state));
@@ -175,11 +175,11 @@ int main(int, char**)
     const auto time = state.link.clock().micros();
     auto timeline = state.link.captureAppTimeline();
     printState(
-      time, timeline, state.link.numPeers(), state.audioPlatform.mEngine.quantum());
+      time, timeline, state.link.numPeers(), 0/*state.audioPlatform.mEngine.quantum()*/);
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
 
   enableBufferedInput();
-  thread.join();*/
+  thread.join();
   return 0;
 }

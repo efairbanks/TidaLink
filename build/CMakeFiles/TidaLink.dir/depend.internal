@@ -431,7 +431,6 @@ CMakeFiles/TidaLink.dir/main.cpp.o
  ../link/include/ableton/link/Controller.hpp
  ../link/include/ableton/link/Gateway.hpp
  ../link/include/ableton/link/GhostXForm.hpp
- ../link/include/ableton/link/HostTimeFilter.hpp
  ../link/include/ableton/link/Kalman.hpp
  ../link/include/ableton/link/LinearRegression.hpp
  ../link/include/ableton/link/Measurement.hpp
@@ -467,12 +466,4 @@ CMakeFiles/TidaLink.dir/main.cpp.o
  ../link/include/ableton/util/Injected.hpp
  ../link/include/ableton/util/Log.hpp
  ../link/include/ableton/util/SafeAsyncHandler.hpp
- /Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioEngine.hpp
- /Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform.hpp
- /Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Asio.hpp
- /Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_CoreAudio.hpp
- /Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Dummy.hpp
- /Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Jack.hpp
- /Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Portaudio.hpp
- /Users/eric/Google Drive/tidalink/./link/examples/linkaudio/AudioPlatform_Wasapi.hpp
- /Users/eric/Google Drive/tidalink/main.cpp
+ /Users/eric/TidaLink/main.cpp

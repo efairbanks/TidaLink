@@ -6,5 +6,5 @@ CXX_FLAGS =  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacO
 
 CXX_DEFINES = -DLINK_PLATFORM_MACOSX=1 -DLINK_PLATFORM_UNIX=1
 
-CXX_INCLUDES = -isystem "/Users/eric/Google Drive/tidalink/link/include" -isystem "/Users/eric/Google Drive/tidalink/link/cmake_include/../modules/asio-standalone/asio/include" 
+CXX_INCLUDES = -isystem /Users/eric/TidaLink/link/include -isystem /Users/eric/TidaLink/link/cmake_include/../modules/asio-standalone/asio/include 
 
