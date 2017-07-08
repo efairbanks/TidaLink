@@ -18,7 +18,7 @@
  */
 
 #include <ableton/Link.hpp>
-//#include "./link/examples/linkaudio/AudioPlatform.hpp"
+#include <ableton/link/HostTimeFilter.hpp>
 #include <algorithm>
 #include <atomic>
 #include <chrono>
@@ -36,14 +36,14 @@ struct State
 {
   std::atomic<bool> running;
   ableton::Link link;
-  //ableton::linkaudio::AudioPlatform audioPlatform;
+  double quantum;
 
   State()
     : running(true)
     , link(120.)
-    //, audioPlatform(link)
   {
     link.enable(true);
+    quantum=4;
   }
 };
 
@@ -124,9 +124,10 @@ void input(State& state)
 #elif defined(LINK_PLATFORM_UNIX)
   in = std::cin.get();
 #endif
+  auto timeLine = state.link.captureAppTimeline();
+  const auto tempo = timeLine.tempo();
 
-  const auto tempo = state.link.captureAppTimeline().tempo();
-  //auto& engine = state.audioPlatform.mEngine;
+  std::chrono::microseconds updateAt(0);
 
   switch (in)
   {
@@ -135,31 +136,19 @@ void input(State& state)
     clearLine();
     return;
   case 'w':
-    //engine.setTempo(tempo - 1);
+    timeLine.setTempo(tempo-1,updateAt);
     break;
   case 'e':
-    //engine.setTempo(tempo + 1);
+    timeLine.setTempo(tempo+1,updateAt);
     break;
   case 'r':
-    //engine.setQuantum(engine.quantum() - 1);
+    state.quantum -= 1;
     break;
   case 't':
-    //engine.setQuantum(std::max(1., engine.quantum() + 1));
-    break;
-  case ' ':
-    /*
-    if (engine.isPlaying())
-    {
-      engine.stopPlaying();
-    }
-    else
-    {
-      engine.startPlaying();
-    }
-    */
+    state.quantum += 1;
     break;
   }
-
+  state.link.commitAppTimeline(timeLine);
   input(state);
 }
 
@@ -175,7 +164,7 @@ int main(int, char**)
     const auto time = state.link.clock().micros();
     auto timeline = state.link.captureAppTimeline();
     printState(
-      time, timeline, state.link.numPeers(), 0/*state.audioPlatform.mEngine.quantum()*/);
+      time, timeline, state.link.numPeers(), state.quantum);
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
 

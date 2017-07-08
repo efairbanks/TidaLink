@@ -7252,6 +7252,14 @@ chrono
 cmath
 -
 
+../link/include/ableton/link/HostTimeFilter.hpp
+ableton/link/LinearRegression.hpp
+-
+chrono
+-
+vector
+-
+
 ../link/include/ableton/link/Kalman.hpp
 array
 -
@@ -7600,6 +7608,8 @@ memory
 
 /Users/eric/TidaLink/main.cpp
 ableton/Link.hpp
+-
+ableton/link/HostTimeFilter.hpp
 -
 algorithm
 -

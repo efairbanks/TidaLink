@@ -430,6 +430,7 @@ CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/ClientSessionTi
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/Controller.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/Gateway.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/GhostXForm.hpp
+CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/HostTimeFilter.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/Kalman.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/LinearRegression.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/link/Measurement.hpp
