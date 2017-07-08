@@ -1,0 +1,3 @@
+/Users/eric/Google Drive/tidalink/build/CMakeFiles/rebuild_cache.dir
+/Users/eric/Google Drive/tidalink/build/CMakeFiles/edit_cache.dir
+/Users/eric/Google Drive/tidalink/build/CMakeFiles/TidaLink.dir

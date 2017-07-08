@@ -18,7 +18,9 @@
  */
 
 #include <ableton/Link.hpp>
-#include "AudioPlatform.hpp"
+#include "./link/examples/linkaudio/AudioPlatform.hpp"
+//#include "AudioPlatform.hpp"
+//#include "AudioPlatform_CoreAudio.hpp"
 #include <algorithm>
 #include <atomic>
 #include <chrono>
