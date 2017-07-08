@@ -75,7 +75,7 @@ void clearLine()
 
 void printHelp()
 {
-  std::cout << std::endl << " < L I N K  H U T >" << std::endl << std::endl;
+  std::cout << std::endl << " < T I D A L I N K >" << std::endl << std::endl;
   std::cout << "usage:" << std::endl;
   std::cout << "  start / stop: space" << std::endl;
   std::cout << "  decrease / increase tempo: w / e" << std::endl;
@@ -127,7 +127,7 @@ void input(State& state)
   auto timeLine = state.link.captureAppTimeline();
   const auto tempo = timeLine.tempo();
 
-  std::chrono::microseconds updateAt(0);
+  std::chrono::microseconds updateAt = state.link.clock().micros();
 
   switch (in)
   {
