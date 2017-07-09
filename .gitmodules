@@ -1,3 +1,6 @@
 [submodule "link"]
 	path = link
 	url = https://github.com/Ableton/link.git
+[submodule "oscpack"]
+	path = oscpack
+	url = https://github.com/MariadeAnton/oscpack.git
