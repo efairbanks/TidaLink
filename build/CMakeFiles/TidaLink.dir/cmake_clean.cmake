@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/TidaLink.dir/main.cpp.o"
+  "CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o"
+  "CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o"
   "TidaLink.pdb"
   "TidaLink"
 )

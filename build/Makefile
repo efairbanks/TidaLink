@@ -150,6 +150,60 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/TidaLink.dir/build.make CMakeFiles/TidaLink.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+oscpack/osc/OscOutboundPacketStream.o: oscpack/osc/OscOutboundPacketStream.cpp.o
+
+.PHONY : oscpack/osc/OscOutboundPacketStream.o
+
+# target to build an object file
+oscpack/osc/OscOutboundPacketStream.cpp.o:
+	$(MAKE) -f CMakeFiles/TidaLink.dir/build.make CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o
+.PHONY : oscpack/osc/OscOutboundPacketStream.cpp.o
+
+oscpack/osc/OscOutboundPacketStream.i: oscpack/osc/OscOutboundPacketStream.cpp.i
+
+.PHONY : oscpack/osc/OscOutboundPacketStream.i
+
+# target to preprocess a source file
+oscpack/osc/OscOutboundPacketStream.cpp.i:
+	$(MAKE) -f CMakeFiles/TidaLink.dir/build.make CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.i
+.PHONY : oscpack/osc/OscOutboundPacketStream.cpp.i
+
+oscpack/osc/OscOutboundPacketStream.s: oscpack/osc/OscOutboundPacketStream.cpp.s
+
+.PHONY : oscpack/osc/OscOutboundPacketStream.s
+
+# target to generate assembly for a file
+oscpack/osc/OscOutboundPacketStream.cpp.s:
+	$(MAKE) -f CMakeFiles/TidaLink.dir/build.make CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.s
+.PHONY : oscpack/osc/OscOutboundPacketStream.cpp.s
+
+oscpack/osc/OscReceivedElements.o: oscpack/osc/OscReceivedElements.cpp.o
+
+.PHONY : oscpack/osc/OscReceivedElements.o
+
+# target to build an object file
+oscpack/osc/OscReceivedElements.cpp.o:
+	$(MAKE) -f CMakeFiles/TidaLink.dir/build.make CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o
+.PHONY : oscpack/osc/OscReceivedElements.cpp.o
+
+oscpack/osc/OscReceivedElements.i: oscpack/osc/OscReceivedElements.cpp.i
+
+.PHONY : oscpack/osc/OscReceivedElements.i
+
+# target to preprocess a source file
+oscpack/osc/OscReceivedElements.cpp.i:
+	$(MAKE) -f CMakeFiles/TidaLink.dir/build.make CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.i
+.PHONY : oscpack/osc/OscReceivedElements.cpp.i
+
+oscpack/osc/OscReceivedElements.s: oscpack/osc/OscReceivedElements.cpp.s
+
+.PHONY : oscpack/osc/OscReceivedElements.s
+
+# target to generate assembly for a file
+oscpack/osc/OscReceivedElements.cpp.s:
+	$(MAKE) -f CMakeFiles/TidaLink.dir/build.make CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.s
+.PHONY : oscpack/osc/OscReceivedElements.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,6 +216,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... oscpack/osc/OscOutboundPacketStream.o"
+	@echo "... oscpack/osc/OscOutboundPacketStream.i"
+	@echo "... oscpack/osc/OscOutboundPacketStream.s"
+	@echo "... oscpack/osc/OscReceivedElements.o"
+	@echo "... oscpack/osc/OscReceivedElements.i"
+	@echo "... oscpack/osc/OscReceivedElements.s"
 .PHONY : help
 
 

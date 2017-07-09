@@ -468,3 +468,18 @@ CMakeFiles/TidaLink.dir/main.cpp.o
  ../link/include/ableton/util/Log.hpp
  ../link/include/ableton/util/SafeAsyncHandler.hpp
  /Users/eric/TidaLink/main.cpp
+ /Users/eric/TidaLink/oscpack/osc/OscException.h
+ /Users/eric/TidaLink/oscpack/osc/OscOutboundPacketStream.h
+ /Users/eric/TidaLink/oscpack/osc/OscTypes.h
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o
+ /Users/eric/TidaLink/oscpack/osc/OscException.h
+ /Users/eric/TidaLink/oscpack/osc/OscHostEndianness.h
+ /Users/eric/TidaLink/oscpack/osc/OscOutboundPacketStream.cpp
+ /Users/eric/TidaLink/oscpack/osc/OscOutboundPacketStream.h
+ /Users/eric/TidaLink/oscpack/osc/OscTypes.h
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o
+ /Users/eric/TidaLink/oscpack/osc/OscException.h
+ /Users/eric/TidaLink/oscpack/osc/OscHostEndianness.h
+ /Users/eric/TidaLink/oscpack/osc/OscReceivedElements.cpp
+ /Users/eric/TidaLink/oscpack/osc/OscReceivedElements.h
+ /Users/eric/TidaLink/oscpack/osc/OscTypes.h

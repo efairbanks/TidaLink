@@ -19,6 +19,7 @@
 
 #include <ableton/Link.hpp>
 #include <ableton/link/HostTimeFilter.hpp>
+#include "oscpack/osc/OscOutboundPacketStream.h"
 #include <algorithm>
 #include <atomic>
 #include <chrono>
@@ -31,6 +32,9 @@
 #include <unistd.h>
 #include <math.h>
 #endif
+
+// referencing this to make sure everything is working properly
+osc::OutboundPacketStream* stream;
 
 struct State
 {

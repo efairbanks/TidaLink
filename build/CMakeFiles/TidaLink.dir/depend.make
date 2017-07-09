@@ -467,4 +467,19 @@ CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/util/Injected.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/util/Log.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../link/include/ableton/util/SafeAsyncHandler.hpp
 CMakeFiles/TidaLink.dir/main.cpp.o: ../main.cpp
+CMakeFiles/TidaLink.dir/main.cpp.o: ../oscpack/osc/OscException.h
+CMakeFiles/TidaLink.dir/main.cpp.o: ../oscpack/osc/OscOutboundPacketStream.h
+CMakeFiles/TidaLink.dir/main.cpp.o: ../oscpack/osc/OscTypes.h
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o: ../oscpack/osc/OscException.h
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o: ../oscpack/osc/OscHostEndianness.h
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o: ../oscpack/osc/OscOutboundPacketStream.cpp
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o: ../oscpack/osc/OscOutboundPacketStream.h
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o: ../oscpack/osc/OscTypes.h
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o: ../oscpack/osc/OscException.h
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o: ../oscpack/osc/OscHostEndianness.h
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o: ../oscpack/osc/OscReceivedElements.cpp
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o: ../oscpack/osc/OscReceivedElements.h
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o: ../oscpack/osc/OscTypes.h
 

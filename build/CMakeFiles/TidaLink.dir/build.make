@@ -81,17 +81,69 @@ CMakeFiles/TidaLink.dir/main.cpp.o.provides: CMakeFiles/TidaLink.dir/main.cpp.o.
 CMakeFiles/TidaLink.dir/main.cpp.o.provides.build: CMakeFiles/TidaLink.dir/main.cpp.o
 
 
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o: CMakeFiles/TidaLink.dir/flags.make
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o: ../oscpack/osc/OscOutboundPacketStream.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/eric/TidaLink/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o -c /Users/eric/TidaLink/oscpack/osc/OscOutboundPacketStream.cpp
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/eric/TidaLink/oscpack/osc/OscOutboundPacketStream.cpp > CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.i
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/eric/TidaLink/oscpack/osc/OscOutboundPacketStream.cpp -o CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.s
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o.requires:
+
+.PHONY : CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o.requires
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o.provides: CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o.requires
+	$(MAKE) -f CMakeFiles/TidaLink.dir/build.make CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o.provides.build
+.PHONY : CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o.provides
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o.provides.build: CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o
+
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o: CMakeFiles/TidaLink.dir/flags.make
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o: ../oscpack/osc/OscReceivedElements.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/eric/TidaLink/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o -c /Users/eric/TidaLink/oscpack/osc/OscReceivedElements.cpp
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/eric/TidaLink/oscpack/osc/OscReceivedElements.cpp > CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.i
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/eric/TidaLink/oscpack/osc/OscReceivedElements.cpp -o CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.s
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o.requires:
+
+.PHONY : CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o.requires
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o.provides: CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o.requires
+	$(MAKE) -f CMakeFiles/TidaLink.dir/build.make CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o.provides.build
+.PHONY : CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o.provides
+
+CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o.provides.build: CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o
+
+
 # Object files for target TidaLink
 TidaLink_OBJECTS = \
-"CMakeFiles/TidaLink.dir/main.cpp.o"
+"CMakeFiles/TidaLink.dir/main.cpp.o" \
+"CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o" \
+"CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o"
 
 # External object files for target TidaLink
 TidaLink_EXTERNAL_OBJECTS =
 
 TidaLink: CMakeFiles/TidaLink.dir/main.cpp.o
+TidaLink: CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o
+TidaLink: CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o
 TidaLink: CMakeFiles/TidaLink.dir/build.make
 TidaLink: CMakeFiles/TidaLink.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/eric/TidaLink/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable TidaLink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/eric/TidaLink/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable TidaLink"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TidaLink.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -100,6 +152,8 @@ CMakeFiles/TidaLink.dir/build: TidaLink
 .PHONY : CMakeFiles/TidaLink.dir/build
 
 CMakeFiles/TidaLink.dir/requires: CMakeFiles/TidaLink.dir/main.cpp.o.requires
+CMakeFiles/TidaLink.dir/requires: CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o.requires
+CMakeFiles/TidaLink.dir/requires: CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o.requires
 
 .PHONY : CMakeFiles/TidaLink.dir/requires
 

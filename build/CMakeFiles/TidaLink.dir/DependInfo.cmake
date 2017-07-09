@@ -5,6 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/eric/TidaLink/main.cpp" "/Users/eric/TidaLink/build/CMakeFiles/TidaLink.dir/main.cpp.o"
+  "/Users/eric/TidaLink/oscpack/osc/OscOutboundPacketStream.cpp" "/Users/eric/TidaLink/build/CMakeFiles/TidaLink.dir/oscpack/osc/OscOutboundPacketStream.cpp.o"
+  "/Users/eric/TidaLink/oscpack/osc/OscReceivedElements.cpp" "/Users/eric/TidaLink/build/CMakeFiles/TidaLink.dir/oscpack/osc/OscReceivedElements.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
