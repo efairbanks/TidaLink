@@ -7,7 +7,7 @@ Currently the tempo sender only sends this message:
 
 - Bundle with timestamp set to the moment when the cps last changed, containing one message:
   - path /tempo
-    - [f] floating point beat value when cps last changed
+    - [f] floating point cycle value when cps last changed
     - [f] floating point cps
     - [s] True if clock is currently paused, False if not (seems to not work yet)
 
