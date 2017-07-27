@@ -94,10 +94,36 @@ void printState(const std::chrono::microseconds time,
 {
   const auto beats = timeline.beatAtTime(time, quantum);
   const auto phase = timeline.phaseAtTime(time, quantum);
+  const auto cycle = beats / quantum;
+  const double cps   = (timeline.tempo() / quantum) / 60;
+  const auto t     = std::chrono::microseconds(time).count();
+  static long diff = 0;
+  static double last_cps = -1;
+  //const auto time = state.link.clock().micros();
+  
+  if (diff == 0) {
+    unsigned long milliseconds_since_epoch = 
+      std::chrono::duration_cast<std::chrono::milliseconds>
+      (std::chrono::system_clock::now().time_since_epoch()).count();
+    // POSIX is millis and Link is micros.. Not sure if that `+500` helps
+    diff = ((milliseconds_since_epoch*1000 + 500) - t);
+  }
+  const auto since_epoch = ((double) (t + diff)) / ((double) 1000000);
+    
   std::cout << std::defaultfloat << "peers: " << numPeers << " | "
             << "quantum: " << quantum << " | "
             << "tempo: " << timeline.tempo() << " | " << std::fixed << "beats: " << beats
+            << " | since_epoch: " << since_epoch
             << " | ";
+  if (cps != last_cps) {
+    std::cout << "\nnew cps: " << cps << " | last cps: " << last_cps << "\n";
+    // TODO - send OSC message with bundle timestamp since_epoch, and
+    // parameters cycle, cps and paused (which can just be the string
+    // 'True' for now..)
+    
+    std::cout << "[" << since_epoch << "] /cps " << cycle << " " << cps << " True\n";
+    last_cps = cps;
+  }
   for (int i = 0; i < ceil(quantum); ++i)
   {
     if (i < phase)
