@@ -31,6 +31,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
+#include "dirtyudp.h"
 #endif
 
 // referencing this to make sure everything is working properly
