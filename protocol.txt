@@ -1,0 +1,30 @@
+
+
+- Tempo receivers currently listen on UDP port 6040 (on all interfaces)
+- Tempo sender currently listens on UDP port 6041 (on all interfaces)
+
+Currently the tempo sender only sends this message:
+
+- Bundle with timestamp set to the moment when the cps last changed, containing one message:
+  - path /tempo
+    - [f] floating point beat value when cps last changed
+    - [f] floating point cps
+    - [s] True if clock is currently paused, False if not (seems to not work yet)
+
+The tempo receivers can send these messages:
+
+- path /cps - cycles per second change, causes new /tempo message to be sent to all receivers
+  - [f] the new cps
+
+- path /nudge, nudge phase offset in seconds, causes new /tempo message to be sent to all
+  receivers (local to the tempo receivers and not wider link network)
+  - [f] nudge value (phase offset, or 0 to reset)
+  
+- path /ping - causes the /tempo message to be (re)sent to all receivers
+
+
+======
+ TODO
+------
+
+[ ] allow cps changes to be scheduled at particular beat values
