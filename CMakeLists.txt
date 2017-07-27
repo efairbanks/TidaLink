@@ -17,5 +17,6 @@ set(SOURCES
   #${CMAKE_SOURCE_DIR}/oscpack/ip/UdpSocket.cpp
   )
 add_executable(TidaLink ${SOURCES} ${INCLUDES})
-target_link_libraries(TidaLink Ableton::Link)
+find_package (Threads) 
+target_link_libraries(TidaLink Ableton::Link ${CMAKE_THREAD_LIBS_INIT})
 #target_link_libraries(TidaLink oscpack)
