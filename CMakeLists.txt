@@ -4,6 +4,7 @@ include(${CMAKE_SOURCE_DIR}/link/AbletonLinkConfig.cmake)
 #add_subdirectory(${CMAKE_SOURCE_DIR}/oscpack)
 set(INCLUDES
   ${INCLUDES}
+  ${CMAKE_SOURCE_DIR}/dirtyudp.h
   ${CMAKE_SOURCE_DIR}/oscpack/osc/OscOutboundPacketStream.h
   ${CMAKE_SOURCE_DIR}/oscpack/osc/OscReceivedElements.h
   ${CMAKE_SOURCE_DIR}/oscpack/osc/OscPacketListener.h
