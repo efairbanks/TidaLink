@@ -32,6 +32,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
+#include "dirtyudp.h"
 #endif
 
 #define NTP_UT_EPOCH_DIFF ((70 * 365 + 17) * 24 * 60 * 60)
