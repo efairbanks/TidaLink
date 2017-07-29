@@ -19,7 +19,8 @@
 
 #include <ableton/Link.hpp>
 #include <ableton/link/HostTimeFilter.hpp>
-#include "oscpack/osc/OscOutboundPacketStream.h"
+#include <oscpack/osc/OscOutboundPacketStream.h>
+#include <oscpack/ip/UdpSocket.h>
 #include <algorithm>
 #include <atomic>
 #include <chrono>
@@ -33,8 +34,20 @@
 #include <math.h>
 #endif
 
+#define NTP_UT_EPOCH_DIFF ((70 * 365 + 17) * 24 * 60 * 60)
+#define OUTPUT_BUFFER_SIZE 1024
+
 // referencing this to make sure everything is working properly
 osc::OutboundPacketStream* stream;
+
+
+class UdpBroadcastSocket : public UdpSocket{
+public:
+	UdpBroadcastSocket( const IpEndpointName& remoteEndpoint ) {
+	  SetEnableBroadcast(true);
+	  Connect( remoteEndpoint );
+	}
+};
 
 struct State
 {
@@ -108,21 +121,36 @@ void printState(const std::chrono::microseconds time,
     // POSIX is millis and Link is micros.. Not sure if that `+500` helps
     diff = ((milliseconds_since_epoch*1000 + 500) - t);
   }
-  const auto since_epoch = ((double) (t + diff)) / ((double) 1000000);
-    
+  const auto timetag_ut = ((double) (t + diff)) / ((double) 1000000);
+  const double timetag_ntpr = timetag_ut + NTP_UT_EPOCH_DIFF;
+
   std::cout << std::defaultfloat << "peers: " << numPeers << " | "
             << "quantum: " << quantum << " | "
             << "tempo: " << timeline.tempo() << " | " << std::fixed << "beats: " << beats
-            << " | since_epoch: " << since_epoch
+            << " | timetag: " << timetag_ntpr
             << " | ";
   if (cps != last_cps) {
+    std::cout << "1\n";
+    UdpBroadcastSocket s(IpEndpointName( "127.255.255.255", 6040));
+    //std::cout << "2\n";
+    std::cout << "3\n";
+    char buffer[OUTPUT_BUFFER_SIZE];
+    osc::OutboundPacketStream p( buffer, OUTPUT_BUFFER_SIZE );
     std::cout << "\nnew cps: " << cps << " | last cps: " << last_cps << "\n";
     // TODO - send OSC message with bundle timestamp since_epoch, and
     // parameters cycle, cps and paused (which can just be the string
     // 'True' for now..)
     
-    std::cout << "[" << since_epoch << "] /cps " << cycle << " " << cps << " True\n";
+    std::cout << "[" << timetag_ntpr << "] /tempo " << cycle << " " << cps << " True\n";
     last_cps = cps;
+
+    p << osc::BeginBundle(timetag_ntpr)
+      << osc::BeginMessage( "/tempo" ) 
+      << (float) cycle << (float) cps << "True" << osc::EndMessage
+      << osc::EndBundle;
+    std::cout << "4\n";
+    s.Send( p.Data(), p.Size() );
+    std::cout << "5\n";
   }
   for (int i = 0; i < ceil(quantum); ++i)
   {
