@@ -123,6 +123,8 @@ void printState(const std::chrono::microseconds time,
     diff = ((milliseconds_since_epoch*1000 + 500) - t);
   }
   double timetag_ut = ((double) (t + diff)) / ((double) 1000000);
+  // latency hack
+  timetag_ut -= 0.2;
   int sec = floor(timetag_ut);
   int usec = floor(1000000 * (timetag_ut - sec));
 
