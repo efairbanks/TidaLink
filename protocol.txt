@@ -5,8 +5,11 @@
 
 Currently the tempo sender only sends this message:
 
-- Bundle with timestamp set to the moment when the cps last changed, containing one message:
+- A message with timestamp (expressed as two integers - sec and
+  microsecs) set to the moment when the cps last changed:
   - path /tempo
+    - [i] timestamp - seconds
+    - [i] timestamp - microseconds
     - [f] floating point cycle value when cps last changed
     - [f] floating point cps
     - [s] True if clock is currently paused, False if not (seems to not work yet)
@@ -21,6 +24,8 @@ The tempo receivers can send these messages:
   - [f] nudge value (phase offset, or 0 to reset)
   
 - path /ping - causes the /tempo message to be (re)sent to all receivers
+
+- path /shutdown - stops the process
 
 
 ======
