@@ -223,12 +223,16 @@ void oscRecvHandler(char* packet, int packetSize, void* data) {
       if(arg != message->ArgumentsEnd())
         throw osc::ExcessArgumentException();
       // --- //
-      int quantum = 4; // need to add void* custom data passthrough to udpHandler signature
       std::chrono::microseconds updateAt = state->link.clock().micros();
-      timeLine.setTempo((double)(cps*quantum*60), updateAt);
+      timeLine.setTempo((double)(cps*state->quantum*60), updateAt);
       state->link.commitAppTimeline(timeLine);
     }
   }
+}
+
+void oscRecvThreadFunc(State& state) {
+  receiver->Loop(oscRecvHandler, (void*)(&state));
+  oscRecvThreadFunc(state);
 }
 
 int main(int, char**)
@@ -238,15 +242,13 @@ int main(int, char**)
   State state;
   printHelp();
   std::thread thread(input, std::ref(state));
+  std::thread oscRecvThread(oscRecvThreadFunc, std::ref(state));
   disableBufferedInput();
 
   while (state.running)
   {
     const auto time = state.link.clock().micros();
     auto timeline = state.link.captureAppTimeline();
-    // --- THIS NEEDS TO BE DONE IN A SEPARATE THREAD --- //
-    //receiver->Loop(oscRecvHandler, (void*)(&state));
-    // -------------------------------------------------- //
     printState(
         time, timeline, state.link.numPeers(), state.quantum);
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
