@@ -106,7 +106,7 @@ class UdpReceiver {
         error("ERROR: There was an issue binding the socket");
       this->clientLength = sizeof(this->clientAddress);
     }
-    void Loop(void (*udpCallback)(char* packet, int packetSize)) {
+    void Loop(void (*udpCallback)(char* packet, int packetSize, void* data), void* data) {
       int packetSize;
       bzero(this->buffer, this->bufferSize*sizeof(char));
       packetSize = recvfrom(  this->socketFile,
@@ -136,7 +136,7 @@ class UdpReceiver {
         printf("%c", this->buffer[i]);
       printf("\n");
       */
-      udpCallback(this->buffer, packetSize);
+      udpCallback(this->buffer, packetSize, data);
     }
 };
 #endif

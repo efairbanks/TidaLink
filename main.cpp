@@ -113,7 +113,7 @@ void printState(const std::chrono::microseconds time,
   const auto beats = timeline.beatAtTime(time, quantum);
   const auto phase = timeline.phaseAtTime(time, quantum);
   const auto cycle = beats / quantum;
-  const double cps   = (timeline.tempo() / quantum) / 60;
+  const double cps = (timeline.tempo() / quantum) / 60;
   const auto t     = std::chrono::microseconds(time).count();
   static long diff = 0;
   static double last_cps = -1;
@@ -209,13 +209,40 @@ void input(State& state)
   input(state);
 }
 
+void oscRecvHandler(char* packet, int packetSize, void* data) {
+  State* state = (State*)data;
+  osc::ReceivedPacket* oscPacket = new osc::ReceivedPacket(packet, packetSize);
+  if(oscPacket->IsMessage()) {
+    osc::ReceivedMessage* message = new osc::ReceivedMessage(*oscPacket);
+    if(std::strcmp(message->AddressPattern(), "/cps") == 0) {
+      auto timeLine = state->link.captureAppTimeline();
+      const auto tempo = timeLine.tempo();
+      // --- //
+      osc::ReceivedMessage::const_iterator arg = message->ArgumentsBegin();
+      float cps = (arg++)->AsFloat();
+      if(arg != message->ArgumentsEnd())
+        throw osc::ExcessArgumentException();
+      // --- //
+      std::chrono::microseconds updateAt = state->link.clock().micros();
+      timeLine.setTempo((double)(cps*state->quantum*60), updateAt);
+      state->link.commitAppTimeline(timeLine);
+    }
+  }
+}
+
+void oscRecvThreadFunc(State& state) {
+  receiver->Loop(oscRecvHandler, (void*)(&state));
+  oscRecvThreadFunc(state);
+}
+
 int main(int, char**)
 {
   sender = new UdpSender("127.255.255.255", 6040, OUTPUT_BUFFER_SIZE);
-  receiver = new UdpReceiver(6041, BUFFERSIZE);
+  receiver = new UdpReceiver(6041, OUTPUT_BUFFER_SIZE);
   State state;
   printHelp();
   std::thread thread(input, std::ref(state));
+  std::thread oscRecvThread(oscRecvThreadFunc, std::ref(state));
   disableBufferedInput();
 
   while (state.running)
@@ -236,12 +263,12 @@ int main(int, char**)
 // --- DIRTYUDP OSCPACK INTEGRATION TESTS --- //
 // ------------------------------------------ //
 #define BUFFERSIZE 4096
-void udpHandler(char* packet, int packetSize) {
+void udpHandler(char* packet, int packetSize, void* data) {
   std::cout << osc::ReceivedPacket(packet, packetSize);
 }
 int main_udprcv(int argc, char** argv) {
   UdpReceiver* receiver = new UdpReceiver(7000, BUFFERSIZE);
-  while(1) receiver->Loop(udpHandler);
+  while(1) receiver->Loop(udpHandler, NULL);
 }
 char buffer [BUFFERSIZE];
 int main_udptx(int argc, char** argv) {
