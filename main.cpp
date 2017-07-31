@@ -20,7 +20,6 @@
 #include <ableton/Link.hpp>
 #include <ableton/link/HostTimeFilter.hpp>
 #include "oscpack/osc/OscOutboundPacketStream.h"
-//#include "oscpack/ip/UdpSocket.h"
 #include "oscpack/osc/OscReceivedElements.h"
 #include "oscpack/osc/OscPrintReceivedElements.h"
 #include "dirtyudp.h"
@@ -52,6 +51,7 @@ public:
 	}
 };
 */
+UdpSender* sender;
 
 struct State
 {
@@ -137,9 +137,8 @@ void printState(const std::chrono::microseconds time,
             << " | sec: " << sec
             << " | usec: " << usec
             << " | ";
-/*
   if (cps != last_cps) {
-    UdpBroadcastSocket s(IpEndpointName( "127.255.255.255", 6040));
+    //UdpBroadcastSocket s(IpEndpointName( "127.255.255.255", 6040));
     char buffer[OUTPUT_BUFFER_SIZE];
     osc::OutboundPacketStream p( buffer, OUTPUT_BUFFER_SIZE );
     std::cout << "\nnew cps: " << cps << " | last cps: " << last_cps << "\n";
@@ -148,9 +147,9 @@ void printState(const std::chrono::microseconds time,
     p << osc::BeginMessage( "/tempo" )
       << sec << usec
       << (float) cycle << (float) cps << "True" << osc::EndMessage;
-    s.Send( p.Data(), p.Size() );
+    //s.Send( p.Data(), p.Size() );
+    sender->Send((char *)p.Data(), p.Size());
   }
-  */
   for (int i = 0; i < ceil(quantum); ++i)
   {
     if (i < phase)
@@ -211,6 +210,7 @@ void input(State& state)
 
 int main_link(int, char**)
 {
+  sender = new UdpSender("127.0.0.1", 7000, OUTPUT_BUFFER_SIZE);
   State state;
   printHelp();
   std::thread thread(input, std::ref(state));
