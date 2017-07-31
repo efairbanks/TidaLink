@@ -208,7 +208,7 @@ void input(State& state)
   input(state);
 }
 
-int main_link(int, char**)
+int main(int, char**)
 {
   sender = new UdpSender("127.0.0.1", 7000, OUTPUT_BUFFER_SIZE);
   State state;
@@ -230,18 +230,17 @@ int main_link(int, char**)
   return 0;
 }
 
-// --- //
-
+// ------------------------------------------ //
+// --- DIRTYUDP OSCPACK INTEGRATION TESTS --- //
+// ------------------------------------------ //
 #define BUFFERSIZE 4096
 void udpHandler(char* packet, int packetSize) {
   std::cout << osc::ReceivedPacket(packet, packetSize);
 }
-
 int main_udprcv(int argc, char** argv) {
   UdpReceiver* receiver = new UdpReceiver(7000, BUFFERSIZE);
   while(1) receiver->Loop(udpHandler);
 }
-
 char buffer [BUFFERSIZE];
 int main_udptx(int argc, char** argv) {
   UdpSender* sender = new UdpSender("127.0.0.1", 7000, BUFFERSIZE);
@@ -253,8 +252,4 @@ int main_udptx(int argc, char** argv) {
     << true << 24 << (float)10.8 << "world" << osc::EndMessage
     << osc::EndBundle;
   sender->Send((char *)p.Data(), p.Size());
-}
-
-int main(int argc, char** argv) {
-  main_udptx(argc, argv);
 }
