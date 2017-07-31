@@ -19,8 +19,7 @@
 
 #include <ableton/Link.hpp>
 #include <ableton/link/HostTimeFilter.hpp>
-#include <oscpack/osc/OscOutboundPacketStream.h>
-#include <oscpack/ip/UdpSocket.h>
+#include "oscpack/osc/OscOutboundPacketStream.h"
 #include "oscpack/osc/OscReceivedElements.h"
 #include "oscpack/osc/OscPrintReceivedElements.h"
 #include "dirtyudp.h"
@@ -43,7 +42,7 @@
 // referencing this to make sure everything is working properly
 osc::OutboundPacketStream* stream;
 
-
+/*
 class UdpBroadcastSocket : public UdpSocket{
 public:
 	UdpBroadcastSocket( const IpEndpointName& remoteEndpoint ) {
@@ -51,6 +50,9 @@ public:
 	  Connect( remoteEndpoint );
 	}
 };
+*/
+UdpSender* sender;
+UdpReceiver* receiver;
 
 struct State
 {
@@ -137,7 +139,7 @@ void printState(const std::chrono::microseconds time,
             << " | usec: " << usec
             << " | ";
   if (cps != last_cps) {
-    UdpBroadcastSocket s(IpEndpointName( "127.255.255.255", 6040));
+    //UdpBroadcastSocket s(IpEndpointName( "127.255.255.255", 6040));
     char buffer[OUTPUT_BUFFER_SIZE];
     osc::OutboundPacketStream p( buffer, OUTPUT_BUFFER_SIZE );
     std::cout << "\nnew cps: " << cps << " | last cps: " << last_cps << "\n";
@@ -146,7 +148,8 @@ void printState(const std::chrono::microseconds time,
     p << osc::BeginMessage( "/tempo" )
       << sec << usec
       << (float) cycle << (float) cps << "True" << osc::EndMessage;
-    s.Send( p.Data(), p.Size() );
+    //s.Send( p.Data(), p.Size() );
+    sender->Send((char *)p.Data(), p.Size());
   }
   for (int i = 0; i < ceil(quantum); ++i)
   {
@@ -206,8 +209,10 @@ void input(State& state)
   input(state);
 }
 
-int main_link(int, char**)
+int main(int, char**)
 {
+  sender = new UdpSender("127.255.255.255", 6040, OUTPUT_BUFFER_SIZE);
+  receiver = new UdpReceiver(6041, BUFFERSIZE);
   State state;
   printHelp();
   std::thread thread(input, std::ref(state));
@@ -227,23 +232,26 @@ int main_link(int, char**)
   return 0;
 }
 
+// ------------------------------------------ //
+// --- DIRTYUDP OSCPACK INTEGRATION TESTS --- //
+// ------------------------------------------ //
+#define BUFFERSIZE 4096
 void udpHandler(char* packet, int packetSize) {
   std::cout << osc::ReceivedPacket(packet, packetSize);
 }
-
 int main_udprcv(int argc, char** argv) {
-  bool sender = false;
-  if(sender) {
-    char* message = "Whaasssssaaaaaap?";
-    UdpSender* sender = new UdpSender("127.0.0.1", 9999, 1024);
-    sender->Send(message, strlen(message));
-  } else {
-    UdpReceiver* receiver = new UdpReceiver(7000, 1024<<5);
-    while(1) receiver->Loop(udpHandler);
-  }
-  return 0;
+  UdpReceiver* receiver = new UdpReceiver(7000, BUFFERSIZE);
+  while(1) receiver->Loop(udpHandler);
 }
-
-int main(int argc, char** argv) {
-  main_udprcv(argc, argv);
+char buffer [BUFFERSIZE];
+int main_udptx(int argc, char** argv) {
+  UdpSender* sender = new UdpSender("127.0.0.1", 7000, BUFFERSIZE);
+  osc::OutboundPacketStream p(buffer, BUFFERSIZE);
+  p << osc::BeginBundleImmediate
+    << osc::BeginMessage( "/test1" )
+    << true << 23 << (float)3.1415 << "hello" << osc::EndMessage
+    << osc::BeginMessage( "/test2" )
+    << true << 24 << (float)10.8 << "world" << osc::EndMessage
+    << osc::EndBundle;
+  sender->Send((char *)p.Data(), p.Size());
 }
