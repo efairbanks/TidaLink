@@ -52,6 +52,7 @@ public:
 };
 */
 UdpSender* sender;
+UdpReceiver* receiver;
 
 struct State
 {
@@ -210,7 +211,8 @@ void input(State& state)
 
 int main(int, char**)
 {
-  sender = new UdpSender("127.0.0.1", 7000, OUTPUT_BUFFER_SIZE);
+  sender = new UdpSender("127.255.255.255", 6040, OUTPUT_BUFFER_SIZE);
+  receiver = new UdpReceiver(6041, BUFFERSIZE);
   State state;
   printHelp();
   std::thread thread(input, std::ref(state));
