@@ -8,8 +8,10 @@ set(INCLUDES
   ${CMAKE_SOURCE_DIR}/oscpack/osc/OscOutboundPacketStream.h
   ${CMAKE_SOURCE_DIR}/oscpack/osc/OscReceivedElements.h
   ${CMAKE_SOURCE_DIR}/oscpack/osc/OscPacketListener.h
+  ${CMAKE_SOURCE_DIR}/oscpack/ip/UdpSocket.h
+  ${CMAKE_SOURCE_DIR}/oscpack/ip/IpEndpointName.h
+  ${CMAKE_SOURCE_DIR}/oscpack/ip/NetworkingUtils.h
   ${CMAKE_SOURCE_DIR}/oscpack/osc/OscPrintReceivedElements.h
-  #${CMAKE_SOURCE_DIR}/oscpack/ip/UdpSocket.h
   )
 set(SOURCES
   ${SOURCES}
@@ -17,9 +19,10 @@ set(SOURCES
   ${CMAKE_SOURCE_DIR}/oscpack/osc/OscOutboundPacketStream.cpp
   ${CMAKE_SOURCE_DIR}/oscpack/osc/OscReceivedElements.cpp
   ${CMAKE_SOURCE_DIR}/oscpack/osc/OscPrintReceivedElements.cpp
-  #${CMAKE_SOURCE_DIR}/oscpack/ip/UdpSocket.cpp
+  ${CMAKE_SOURCE_DIR}/oscpack/ip/UdpSocket.cpp
+  ${CMAKE_SOURCE_DIR}/oscpack/ip/NetworkingUtils.cpp
   )
 add_executable(TidaLink ${SOURCES} ${INCLUDES})
 find_package (Threads) 
-target_link_libraries(TidaLink Ableton::Link ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(TidaLink Ableton::Link oscpack ${CMAKE_THREAD_LIBS_INIT})
 #target_link_libraries(TidaLink oscpack)

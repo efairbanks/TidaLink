@@ -19,7 +19,8 @@
 
 #include <ableton/Link.hpp>
 #include <ableton/link/HostTimeFilter.hpp>
-#include "oscpack/osc/OscOutboundPacketStream.h"
+#include <oscpack/osc/OscOutboundPacketStream.h>
+#include <oscpack/ip/UdpSocket.h>
 #include "oscpack/osc/OscReceivedElements.h"
 #include "oscpack/osc/OscPrintReceivedElements.h"
 #include "dirtyudp.h"
@@ -36,8 +37,20 @@
 #include <math.h>
 #endif
 
+// #define NTP_UT_EPOCH_DIFF ((70 * 365 + 17) * 24 * 60 * 60)
+#define OUTPUT_BUFFER_SIZE 1024
+
 // referencing this to make sure everything is working properly
 osc::OutboundPacketStream* stream;
+
+
+class UdpBroadcastSocket : public UdpSocket{
+public:
+	UdpBroadcastSocket( const IpEndpointName& remoteEndpoint ) {
+	  SetEnableBroadcast(true);
+	  Connect( remoteEndpoint );
+	}
+};
 
 struct State
 {
@@ -97,10 +110,44 @@ void printState(const std::chrono::microseconds time,
 {
   const auto beats = timeline.beatAtTime(time, quantum);
   const auto phase = timeline.phaseAtTime(time, quantum);
+  const auto cycle = beats / quantum;
+  const double cps   = (timeline.tempo() / quantum) / 60;
+  const auto t     = std::chrono::microseconds(time).count();
+  static long diff = 0;
+  static double last_cps = -1;
+  //const auto time = state.link.clock().micros();
+  
+  if (diff == 0) {
+    unsigned long milliseconds_since_epoch = 
+      std::chrono::duration_cast<std::chrono::milliseconds>
+      (std::chrono::system_clock::now().time_since_epoch()).count();
+    // POSIX is millis and Link is micros.. Not sure if that `+500` helps
+    diff = ((milliseconds_since_epoch*1000 + 500) - t);
+  }
+  double timetag_ut = ((double) (t + diff)) / ((double) 1000000);
+  // latency hack
+  timetag_ut -= 0.2;
+  int sec = floor(timetag_ut);
+  int usec = floor(1000000 * (timetag_ut - sec));
+
   std::cout << std::defaultfloat << "peers: " << numPeers << " | "
-    << "quantum: " << quantum << " | "
-    << "tempo: " << timeline.tempo() << " | " << std::fixed << "beats: " << beats
-    << " | ";
+            << "quantum: " << quantum << " | "
+            << "tempo: " << timeline.tempo() << " | " << std::fixed << "beats: " << beats
+            << " | sec: " << sec
+            << " | usec: " << usec
+            << " | ";
+  if (cps != last_cps) {
+    UdpBroadcastSocket s(IpEndpointName( "127.255.255.255", 6040));
+    char buffer[OUTPUT_BUFFER_SIZE];
+    osc::OutboundPacketStream p( buffer, OUTPUT_BUFFER_SIZE );
+    std::cout << "\nnew cps: " << cps << " | last cps: " << last_cps << "\n";
+    last_cps = cps;
+
+    p << osc::BeginMessage( "/tempo" )
+      << sec << usec
+      << (float) cycle << (float) cps << "True" << osc::EndMessage;
+    s.Send( p.Data(), p.Size() );
+  }
   for (int i = 0; i < ceil(quantum); ++i)
   {
     if (i < phase)
