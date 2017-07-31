@@ -1,5 +1,7 @@
 #ifndef DIRTYUDP_HPP
 #define DIRTYUDP_HPP
+#include <iostream>
+#include <cstring>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,6 +11,9 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h> 
+#include "oscpack/osc/OscOutboundPacketStream.h"
+#include "oscpack/osc/OscReceivedElements.h"
+#include "oscpack/osc/OscPrintReceivedElements.h"
 void error(char* message) {
   perror(message);
   exit(0);
@@ -101,16 +106,16 @@ class UdpReceiver {
         error("ERROR: There was an issue binding the socket");
       this->clientLength = sizeof(this->clientAddress);
     }
-    void Loop() {
-      int tempFile;
+    void Loop(void (*udpCallback)(char* packet, int packetSize)) {
+      int packetSize;
       bzero(this->buffer, this->bufferSize*sizeof(char));
-      tempFile = recvfrom(this->socketFile,
-                          this->buffer,
-                          this->bufferSize,
-                          0,
-                          (struct sockaddr *)&this->clientAddress,
-                          &this->clientLength);
-      if(tempFile < 0)
+      packetSize = recvfrom(  this->socketFile,
+                              this->buffer,
+                              this->bufferSize,
+                              0,
+                              (struct sockaddr *)&this->clientAddress,
+                              &this->clientLength);
+      if(packetSize < 0)
         error("ERROR: There was a problem receiving data from a client");
       this->client = gethostbyaddr( (const char*)&this->clientAddress.sin_addr.s_addr,
                                     sizeof(this->clientAddress.sin_addr.s_addr),
@@ -120,12 +125,18 @@ class UdpReceiver {
       this->clientIP = inet_ntoa(this->clientAddress.sin_addr);
       if(this->clientIP == NULL)
         error("ERROR: Error getting client IP.");
+      // ----------------------------- //
+      // --- Some old info logging --- //
+      // ----------------------------- //
+      /*
       printf("Received datagram from %s (%s):\n",
               this->client->h_name,
               this->clientIP);
       for(int i=0; i<strlen(this->buffer)&&i<this->bufferSize; i++)
         printf("%c", this->buffer[i]);
       printf("\n");
+      */
+      udpCallback(this->buffer, packetSize);
     }
 };
 #endif

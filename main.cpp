@@ -21,6 +21,9 @@
 #include <ableton/link/HostTimeFilter.hpp>
 #include <oscpack/osc/OscOutboundPacketStream.h>
 #include <oscpack/ip/UdpSocket.h>
+#include "oscpack/osc/OscReceivedElements.h"
+#include "oscpack/osc/OscPrintReceivedElements.h"
+#include "dirtyudp.h"
 #include <algorithm>
 #include <atomic>
 #include <chrono>
@@ -32,7 +35,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
-#include "dirtyudp.h"
 #endif
 
 // #define NTP_UT_EPOCH_DIFF ((70 * 365 + 17) * 24 * 60 * 60)
@@ -58,7 +60,7 @@ struct State
 
   State()
     : running(true)
-    , link(120.)
+      , link(120.)
   {
     link.enable(true);
     quantum=4;
@@ -102,9 +104,9 @@ void printHelp()
 }
 
 void printState(const std::chrono::microseconds time,
-  const ableton::Link::Timeline timeline,
-  const std::size_t numPeers,
-  const double quantum)
+    const ableton::Link::Timeline timeline,
+    const std::size_t numPeers,
+    const double quantum)
 {
   const auto beats = timeline.beatAtTime(time, quantum);
   const auto phase = timeline.phaseAtTime(time, quantum);
@@ -183,28 +185,28 @@ void input(State& state)
 
   switch (in)
   {
-  case 'q':
-    state.running = false;
-    clearLine();
-    return;
-  case 'w':
-    timeLine.setTempo(tempo-1,updateAt);
-    break;
-  case 'e':
-    timeLine.setTempo(tempo+1,updateAt);
-    break;
-  case 'r':
-    state.quantum -= 1;
-    break;
-  case 't':
-    state.quantum += 1;
-    break;
+    case 'q':
+      state.running = false;
+      clearLine();
+      return;
+    case 'w':
+      timeLine.setTempo(tempo-1,updateAt);
+      break;
+    case 'e':
+      timeLine.setTempo(tempo+1,updateAt);
+      break;
+    case 'r':
+      state.quantum -= 1;
+      break;
+    case 't':
+      state.quantum += 1;
+      break;
   }
   state.link.commitAppTimeline(timeLine);
   input(state);
 }
 
-int main(int, char**)
+int main_link(int, char**)
 {
   State state;
   printHelp();
@@ -216,11 +218,32 @@ int main(int, char**)
     const auto time = state.link.clock().micros();
     auto timeline = state.link.captureAppTimeline();
     printState(
-      time, timeline, state.link.numPeers(), state.quantum);
+        time, timeline, state.link.numPeers(), state.quantum);
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
 
   enableBufferedInput();
   thread.join();
   return 0;
+}
+
+void udpHandler(char* packet, int packetSize) {
+  std::cout << osc::ReceivedPacket(packet, packetSize);
+}
+
+int main_udprcv(int argc, char** argv) {
+  bool sender = false;
+  if(sender) {
+    char* message = "Whaasssssaaaaaap?";
+    UdpSender* sender = new UdpSender("127.0.0.1", 9999, 1024);
+    sender->Send(message, strlen(message));
+  } else {
+    UdpReceiver* receiver = new UdpReceiver(7000, 1024<<5);
+    while(1) receiver->Loop(udpHandler);
+  }
+  return 0;
+}
+
+int main(int argc, char** argv) {
+  main_udprcv(argc, argv);
 }

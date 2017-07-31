@@ -11,14 +11,16 @@ set(INCLUDES
   ${CMAKE_SOURCE_DIR}/oscpack/ip/UdpSocket.h
   ${CMAKE_SOURCE_DIR}/oscpack/ip/IpEndpointName.h
   ${CMAKE_SOURCE_DIR}/oscpack/ip/NetworkingUtils.h
+  ${CMAKE_SOURCE_DIR}/oscpack/osc/OscPrintReceivedElements.h
   )
 set(SOURCES
   ${SOURCES}
   ${CMAKE_SOURCE_DIR}/main.cpp
-  #${CMAKE_SOURCE_DIR}/oscpack/osc/OscOutboundPacketStream.cpp
-  #${CMAKE_SOURCE_DIR}/oscpack/osc/OscReceivedElements.cpp
-  #${CMAKE_SOURCE_DIR}/oscpack/ip/UdpSocket.cpp
-  #${CMAKE_SOURCE_DIR}/oscpack/ip/NetworkingUtils.cpp
+  ${CMAKE_SOURCE_DIR}/oscpack/osc/OscOutboundPacketStream.cpp
+  ${CMAKE_SOURCE_DIR}/oscpack/osc/OscReceivedElements.cpp
+  ${CMAKE_SOURCE_DIR}/oscpack/osc/OscPrintReceivedElements.cpp
+  ${CMAKE_SOURCE_DIR}/oscpack/ip/UdpSocket.cpp
+  ${CMAKE_SOURCE_DIR}/oscpack/ip/NetworkingUtils.cpp
   )
 add_executable(TidaLink ${SOURCES} ${INCLUDES})
 find_package (Threads) 
