@@ -91,7 +91,7 @@ class UdpReceiver {
       this->socketOptions = 1;
       setsockopt( this->socketFile,
                   SOL_SOCKET,
-                  SO_REUSEADDR,
+                  SO_BROADCAST,
                   (const void*)&this->socketOptions,
                   sizeof(int));
       // construct server address
